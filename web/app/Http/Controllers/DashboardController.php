@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
+use Carbon\Carbon;
+
 class DashboardController extends Controller
 {
     /**
@@ -11,6 +14,20 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $fallTime = Storage::exists('fall') ? Carbon::createFromTimestamp(trim(Storage::get('fall'))) : null;
+        $pillTime = Storage::exists('pill') ? Carbon::createFromTimestamp(trim(Storage::get('pill'))) : null;
+        $stoveTime = Storage::exists('temp') ? Carbon::createFromTimestamp(trim(Storage::get('temp'))) : null;
+        $doorAlarmTime = Storage::exists('doora') ? Carbon::createFromTimestamp(trim(Storage::get('doora'))) : null;
+
+        if (Storage::exists('door')) {
+            $door = explode(',', trim(Storage::get('door')));
+            $doorOpen = ($door[0] == 'opened') ? true : false;
+            $doorTime = Carbon::createFromTimestamp($door[1]);
+        } else {
+            $doorOpen = false;
+            $doorTime = null;
+        }
+
+        return view('dashboard', compact('fallTime', 'pillTime', 'stoveTime', 'doorAlarmTime', 'doorOpen', 'doorTime'));
     }
 }
