@@ -11,8 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'web'], function () {
+
+    Route::get('/', ['as' => 'home', function () {
+        return redirect('dashboard');
+    }]);
+
+    Route::get('dashboard', ['as' => 'dashboard', function () {
+        return view('dashboard');
+    }]);
+
 });
 
 Route::group(['middleware' => 'api', 'prefix' => 'api'], function () {
