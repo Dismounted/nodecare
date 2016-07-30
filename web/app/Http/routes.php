@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => 'api', 'prefix' => 'api'], function () {
+
+    Route::post('trigger', [
+        'as' => 'api.trigger',
+        'uses' => 'TriggerController@store'
+    ]);
+
+});
