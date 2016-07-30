@@ -15,8 +15,29 @@ class TriggerController extends Controller
      */
     public function store(Request $request)
     {
-        $body = $request->getContent();
-        Storage::append('messages', $body . "\n");
+        $body = trim($request->getContent());
+
+        switch ($body) {
+            case 'fall':
+                Storage::put('fall', time());
+                break;
+            case 'pill':
+                Storage::put('pill', time());
+                break;
+            case 'door0':
+                Storage::put('door', 'opened,' . time());
+                break;
+            case 'door1':
+                Storage::put('door', 'closed,' . time());
+                break;
+            case 'doora':
+                Storage::put('doora', time());
+                break;
+            case 'temp':
+                Storage::put('temp', time());
+                break;
+        }
+
         return '';
     }
 }
