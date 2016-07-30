@@ -2,6 +2,10 @@
 
 @section('title', 'Dashboard')
 
+@push('meta')
+    <meta http-equiv="refresh" content="3">
+@endpush
+
 @section('content')
     <main class="row dashboard">
         <div class="col-sm-3">

@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        @stack('meta')
+
         <title>@yield('title') &middot; NodeCare</title>
 
         <link rel="icon" type="image/png" href="{{ asset('favicon-32x32.png') }}" sizes="32x32">
