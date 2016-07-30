@@ -22,6 +22,11 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'DashboardController@index'
     ]);
 
+    Route::get('dashboard/dismiss/{type}', [
+        'as' => 'dashboard.dismiss',
+        'uses' => 'DashboardController@dismiss'
+    ]);
+
 });
 
 Route::group(['middleware' => 'api', 'prefix' => 'api'], function () {

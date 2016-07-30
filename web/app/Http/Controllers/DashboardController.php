@@ -30,4 +30,26 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('fallTime', 'pillTime', 'stoveTime', 'doorAlarmTime', 'doorOpen', 'doorTime'));
     }
+
+    /**
+     * Dismiss an alarm
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dismiss($type)
+    {
+        switch ($type) {
+            case 'fall':
+                Storage::delete('fall');
+                break;
+            case 'doora':
+                Storage::delete('doora');
+                break;
+            case 'temp':
+                Storage::delete('temp');
+                break;
+        }
+
+        return redirect('dashboard');
+    }
 }

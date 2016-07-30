@@ -14,6 +14,9 @@
             </div>
             @if (isset($fallTime))
                 <div class="alert alert-danger">
+                    <a href="{{ route('dashboard.dismiss', ['type' => 'fall']) }}">
+                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="Dismiss"><span>&times;</span></button>
+                    </a>
                     <h4>Fall Alarm</h4>
                     <p>Grandma fell <strong><em>{{ $fallTime->tz('Australia/Melbourne')->diffForHumans() }}</em></strong>.</p>
                 </div>
@@ -46,6 +49,9 @@
             </div>
             @if (isset($doorAlarmTime))
                 <div class="alert alert-danger">
+                    <a href="{{ route('dashboard.dismiss', ['type' => 'doora']) }}">
+                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="Dismiss"><span>&times;</span></button>
+                    </a>
                     <h4>Door Alarm</h4>
                     <p>Grandma left the door open at least <strong><em>{{ $doorAlarmTime->tz('Australia/Melbourne')->subHours(1)->diffForHumans() }}</em></strong>.</p>
                 </div>
@@ -67,6 +73,9 @@
             </div>
             @if (isset($stoveTime))
                 <div class="alert alert-danger">
+                    <a href="{{ route('dashboard.dismiss', ['type' => 'temp']) }}">
+                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="Dismiss"><span>&times;</span></button>
+                    </a>
                     <h4>Stove Alarm</h4>
                     <p>Grandma turned on the stove at least <strong><em>{{ $stoveTime->tz('Australia/Melbourne')->subHours(1)->diffForHumans() }}</em></strong>.</p>
                 </div>

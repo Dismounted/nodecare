@@ -4,4 +4,5 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $('[data-toggle="tooltip"]').tooltip();
 });
