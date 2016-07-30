@@ -17,9 +17,10 @@ Route::group(['middleware' => 'web'], function () {
         return redirect('dashboard');
     }]);
 
-    Route::get('dashboard', ['as' => 'dashboard', function () {
-        return view('dashboard');
-    }]);
+    Route::get('dashboard', [
+        'as' => 'dashboard',
+        'uses' => 'DashboardController@index'
+    ]);
 
 });
 
