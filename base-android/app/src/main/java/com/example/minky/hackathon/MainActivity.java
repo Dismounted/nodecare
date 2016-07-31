@@ -239,34 +239,52 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.getValue().equals("true")) {
                     if (dataSnapshot.getKey().equals("doora")) {
                         notifyPopUp(doorAlert, "Grandma has left the door open!");
+                        new httpConnect().execute("doora");
                         myRef.child("doora").setValue("false");
+
                     } else if (dataSnapshot.getKey().equals("pill")) {
                         notifyPopUp(pillAlert, "Grandma has taken her pills!");
+                        new httpConnect().execute("pill");
                         myRef.child("pill").setValue("false");
+
                     } else if (dataSnapshot.getKey().equals("temp")) {
                         notifyPopUp(tempAlert, "Grandma is getting sweaty!");
+                        new httpConnect().execute("temp");
                         myRef.child("temp").setValue("false");
+
                     } else if (dataSnapshot.getKey().equals("fall")) {
                         notifyPopUp(fallAlert, "Grandma has fallen over!");
+                        new httpConnect().execute("fall");
                         myRef.child("fall").setValue("false");
+
                     } else if(dataSnapshot.getKey().equals("door0")){
                         //send info to server
                         ///httpPost("https://app.nodecare.me/api/trigger","door0");
-                        new httpConnect().execute();
+                        new httpConnect().execute("door0");
                         myRef.child("door0").setValue("false");
+
                     } else if(dataSnapshot.getKey().equals("door1")){
                         //httpPost("https://app.nodecare.me/api/trigger","door1");
                         //send info to server
-                        new httpConnect().execute();
+                        new httpConnect().execute("door1");
                         myRef.child("door1").setValue("false");
+                        
                     }
                 }
             }
 
-            class httpConnect extends AsyncTask<Void, Void, Void>{
+            class httpConnect extends AsyncTask<String, Void, Void>{
+/*
                 @Override
                 protected Void doInBackground(Void... params) {
                     httpPost("https://app.nodecare.me/api/trigger","door0");
+                    return null;
+                }
+*/
+
+                @Override
+                protected Void doInBackground(String... params) {
+                    httpPost("https://app.nodecare.me/api/trigger",params[0]);
                     return null;
                 }
             };
